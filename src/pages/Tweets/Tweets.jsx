@@ -1,4 +1,4 @@
-import { Box, Button, MenuItem, Select } from '@mui/material';
+import { Box, Button, MenuItem, Select, Toolbar } from '@mui/material';
 import { TweetsList } from '../../components/TweetsList/TweetsList';
 import { useDispatch } from 'react-redux';
 import { useUsers } from '../../Hooks/useUsers';
@@ -17,12 +17,14 @@ export const Tweets = () => {
     // toolbar
     <Box component="main">
       <Box component="div">
-        <Button>Back</Button>
-        {/* <Select id="filter-select">
+        <Toolbar>
+          <Button>Back</Button>
+          {/* <Select id="filter-select">
           <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
           <MenuItem value={30}>Thirty</MenuItem>
         </Select> */}
+        </Toolbar>
       </Box>
 
       <TweetsList />

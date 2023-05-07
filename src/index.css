@@ -13,6 +13,11 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-code {
+/* code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+} */
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }

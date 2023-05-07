@@ -4,7 +4,7 @@ import { mockApi } from '../../services/api/mockapi';
 const initialState = {
   users: [],
   loadMore: true,
-  filter: '',
+  filter: 'All',
   isLoading: false,
   isError: false,
   page: 1,

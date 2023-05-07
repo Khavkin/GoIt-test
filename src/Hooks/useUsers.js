@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import {
   selectFilter,
+  selectFilteredUsers,
   selectIsLoading,
   selectLoadMore,
   selectPage,
@@ -14,5 +15,6 @@ export const useUsers = () => {
     filter: useSelector(selectFilter),
     page: useSelector(selectPage),
     loadMore: useSelector(selectLoadMore),
+    filteredUsers: useSelector(selectFilteredUsers),
   };
 };

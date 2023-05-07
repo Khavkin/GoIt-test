@@ -7,7 +7,7 @@ import { useUsers } from '../../Hooks/useUsers';
 export const TweetsList = () => {
   //const page = useParams
 
-  const { users = [], page } = useUsers();
+  const { filteredUsers = [], page } = useUsers();
   const { error, isLoading } = useGetUsersByPageQuery(page);
 
   //console.log(users, isLoading);
@@ -16,8 +16,11 @@ export const TweetsList = () => {
     <Box component={'section'}>
       {isLoading && <h2>Loadding...</h2>}
       {!isLoading && (
-        <Box component={'ul'} sx={{ display: 'flex', flexWrap: 'wrap' }}>
-          {users?.map(user => (
+        <Box
+          component={'ul'}
+          sx={{ display: 'flex', flexWrap: 'wrap', gap: '6px', justifyContent: 'center' }}
+        >
+          {filteredUsers?.map(user => (
             <li key={user.id}>
               <TweetListItem
                 user={user.user}
