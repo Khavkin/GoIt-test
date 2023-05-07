@@ -6,6 +6,7 @@ import { selectSubscribe } from '../../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { addSubscription, deleteSubscription } from '../../redux/SubscribeSlice/SubscribeSlice';
 import { useUpdateUserByIdMutation } from '../../services/api/mockapi';
+import { ClockLoader } from 'react-spinners';
 
 export const TweetListItem = ({
   user = 'Jusik Crew',
@@ -155,7 +156,13 @@ export const TweetListItem = ({
           }}
           onClick={handleOnClick}
         >
-          {getSubscritionIndex() < 0 ? 'Follow' : 'Following'}
+          {isLoading ? (
+            <ClockLoader color="#ce36d6" loading size={26} />
+          ) : getSubscritionIndex() < 0 ? (
+            'Follow'
+          ) : (
+            'Following'
+          )}
         </Button>
       </Box>
     </Box>
