@@ -7,30 +7,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSubscription, deleteSubscription } from '../../redux/SubscribeSlice/SubscribeSlice';
 import { useUpdateUserByIdMutation } from '../../services/api/mockapi';
 import { ClockLoader } from 'react-spinners';
+import { theme } from '../../Theme/Theme';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useCallback } from 'react';
+//console.dir(theme);
 
-export const TweetListItem = ({
-  user = 'Jusik Crew',
-  avatar = 'https://i.pravatar.cc/300',
-  tweets = 283,
-  followers = 123212,
-  id = 2,
-}) => {
+const formatNumber = num => {
+  const myObj = {
+    useGrouping: true,
+  };
+  return num.toLocaleString('En-en', myObj);
+};
+
+export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 0, id = 0 }) => {
   const usersSubscriptions = useSelector(selectSubscribe);
   const [updateUser, { isLoading, error, isError }] = useUpdateUserByIdMutation();
   const dispatch = useDispatch();
+  const [isFollowing, setIsFollowing] = useState(false);
   // console.log(usersSubscriptions);
 
-  const getSubscritionIndex = () => {
+  const getSubscritionIndex = useCallback(() => {
     const index = usersSubscriptions.indexOf(id);
     return index;
-  };
+  }, [id, usersSubscriptions]);
+
+  useEffect(() => {
+    if (getSubscritionIndex() < 0) setIsFollowing(false);
+    else setIsFollowing(true);
+  }, [getSubscritionIndex]);
 
   const handleOnClick = async () => {
     const index = getSubscritionIndex();
-    if (index >= 0) {
+    if (isFollowing) {
       try {
         await updateUser({ id: id, followers: followers - 1 });
         dispatch(deleteSubscription(index));
+        setIsFollowing(false);
       } catch (error) {
         console.log(error);
       }
@@ -38,6 +51,7 @@ export const TweetListItem = ({
       try {
         await updateUser({ id: id, followers: followers + 1 });
         dispatch(addSubscription(id));
+        setIsFollowing(true);
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +68,7 @@ export const TweetListItem = ({
         position: 'relative',
         boxShadow: '-2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23)',
         borderRadius: '20px',
-        background: `url("${backgroundImage}"),url("${logoImage}"),linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%)`,
+        background: `url("${backgroundImage}"),url("${logoImage}"),${theme.palette.background.paper}`,
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top 28px center, top 20px left 20px, center',
         ':after': {
@@ -112,7 +126,6 @@ export const TweetListItem = ({
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          color: '#EBD8FF',
         }}
       >
         <Typography
@@ -126,7 +139,7 @@ export const TweetListItem = ({
             gap: '10px',
           }}
         >
-          {tweets} Tweets
+          {formatNumber(tweets)} Tweets
         </Typography>
         <Typography
           sx={{
@@ -139,7 +152,7 @@ export const TweetListItem = ({
             gap: '10px',
           }}
         >
-          {followers} Followers
+          {formatNumber(followers)} Followers
         </Typography>
         <Button
           sx={{
@@ -148,17 +161,19 @@ export const TweetListItem = ({
             fontFamily: 'Montserrat',
             fontWeight: '600',
             fontSize: '18px',
-            background: '#EBD8FF',
+            background: theme => {
+              return !isFollowing ? theme.palette.background.default : theme.palette.secondary.main;
+            },
             boxShadow: '0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25)',
             borderRadius: '10.3108px',
-            color: '#373737',
+            color: `${theme.palette.text.secondary}`,
             ':hover': { background: '#5CD3A8' },
           }}
           onClick={handleOnClick}
         >
           {isLoading ? (
             <ClockLoader color="#ce36d6" loading size={26} />
-          ) : getSubscritionIndex() < 0 ? (
+          ) : !isFollowing ? (
             'Follow'
           ) : (
             'Following'
