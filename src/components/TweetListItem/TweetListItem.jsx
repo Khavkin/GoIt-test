@@ -132,7 +132,7 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
           sx={{
             mb: '16px',
             textTransform: 'uppercase',
-            fontFamily: 'Montserrat',
+            // fontFamily: 'Montserrat',
             fontWeight: '500',
             fontSize: '20px',
             display: 'flex',
@@ -145,7 +145,7 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
           sx={{
             mb: '26px',
             textTransform: 'uppercase',
-            fontFamily: 'Montserrat',
+            // fontFamily: 'Montserrat',
             fontWeight: '500',
             fontSize: '20px',
             display: 'flex',
@@ -158,7 +158,7 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
           sx={{
             width: '196px',
             height: '50px',
-            fontFamily: 'Montserrat',
+            // fontFamily: 'Montserrat',
             fontWeight: '600',
             fontSize: '18px',
             background: theme => {

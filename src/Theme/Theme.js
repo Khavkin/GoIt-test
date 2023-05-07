@@ -18,6 +18,18 @@ export const theme = createTheme({
       paper: 'linear-gradient(114.99deg, #471CA9 -0.99%, #5736A3 54.28%, #4B2A99 78.99%)',
     },
   },
+  typography: {
+    fontFamily: 'Montserrat, Sans-Serif',
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: `
+        @font-face {
+          font-family: 'Montserrat';
+        }
+      `,
+    },
+  },
 });
 
 // palette: {

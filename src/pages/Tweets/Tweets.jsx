@@ -44,7 +44,7 @@ export const Tweets = () => {
               width: '196px',
               height: '50px',
 
-              fontFamily: 'Montserrat',
+              //  fontFamily: 'Montserrat',
               fontWeight: '600',
               fontSize: '18px',
               background: `${theme.palette.secondary.main}`,
