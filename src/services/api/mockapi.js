@@ -16,9 +16,18 @@ export const mockApi = createApi({
         method: 'PUT',
         body: { followers: followers },
       }),
-      invalidatesTags: ['Users'],
+      // invalidatesTags: ['Users'],
+      invalidatesTags: (result, error, id) => [
+        { type: 'Users', id },
+        { type: 'Users', id: 'PARTIAL-LIST' },
+      ],
     }),
   }),
 });
+
+// invalidatesTags: (result, error, id) => [
+//         { type: 'Posts', id },
+//         { type: 'Posts', id: 'PARTIAL-LIST' },
+//       ],
 
 export const { useGetUsersByPageQuery, useUpdateUserByIdMutation } = mockApi;
