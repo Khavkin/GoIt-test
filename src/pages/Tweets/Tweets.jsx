@@ -1,29 +1,54 @@
-import { Box, Button, MenuItem, Select, Toolbar } from '@mui/material';
+import { Box, Button, InputLabel, MenuItem, Select, Toolbar } from '@mui/material';
 import { TweetsList } from '../../components/TweetsList/TweetsList';
 import { useDispatch } from 'react-redux';
 import { useUsers } from '../../Hooks/useUsers';
-import { setPage } from '../../redux/UsersSlice/UsersSlice';
+import { setFilter, setPage } from '../../redux/UsersSlice/UsersSlice';
 import { theme } from '../../Theme/Theme';
 import { ClockLoader } from 'react-spinners';
 
 export const Tweets = () => {
   const dispatch = useDispatch();
-  const { page, loadMore, isLoading } = useUsers();
+  const { page, loadMore, isLoading, filter } = useUsers();
 
   const handleOnClick = () => {
     dispatch(setPage(page + 1));
   };
+
+  const handleOnFilterChange = ({ target }) => {
+    dispatch(setFilter(target.value));
+  };
+
   return (
     // toolbar
     <Box component="main">
       <Box component="div">
-        <Toolbar>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Button>Back</Button>
-          {/* <Select id="filter-select">
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select> */}
+          <InputLabel
+            sx={{
+              display: 'flex',
+              gap: '20px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: theme.palette.primary.main,
+            }}
+          >
+            Select users
+            <Select
+              value={filter}
+              onChange={handleOnFilterChange}
+              sx={{
+                width: '150px',
+                color: theme.palette.primary.main,
+                zIndex: '100',
+                background: theme.palette.background.default,
+              }}
+            >
+              <MenuItem value={'All'}>All</MenuItem>
+              <MenuItem value={'Follow'}>Follow</MenuItem>
+              <MenuItem value={'Following'}>Following</MenuItem>
+            </Select>
+          </InputLabel>
         </Toolbar>
       </Box>
       <TweetsList />

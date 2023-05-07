@@ -12,7 +12,7 @@ export const selectFilteredUsers = state => {
     case 'Follow':
       filteredUsers = users.filter(({ id }) => !subscribe.includes(id));
       break;
-    case 'Followings':
+    case 'Following':
       filteredUsers = users.filter(({ id }) => subscribe.includes(id));
       break;
     default:
