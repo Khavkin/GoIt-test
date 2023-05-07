@@ -1,22 +1,42 @@
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+
 import { configureStore } from '@reduxjs/toolkit';
-// Or from '@reduxjs/toolkit/query/react'
-//import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { usersReducer } from './UsersSlice/UsersSlice';
 import { mockApi } from '../services/api/mockapi';
 import { subscribeReducer } from './SubscribeSlice/SubscribeSlice';
 
+const persistConfig = {
+  key: 'subscribe',
+  storage,
+  whitelist: ['users'],
+};
+
+const persistedSubscribeReducer = persistReducer(persistConfig, subscribeReducer);
+
 export const store = configureStore({
   reducer: {
     [mockApi.reducerPath]: mockApi.reducer,
     users: usersReducer,
-    subscribe: subscribeReducer,
+    subscribe: persistedSubscribeReducer,
   },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(mockApi.middleware),
+
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(mockApi.middleware),
 });
 
-// optional, but required for refetchOnFocus/refetchOnReconnect behaviors
-// see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
-//setupListeners(store.dispatch);
+export const persistor = persistStore(store);
