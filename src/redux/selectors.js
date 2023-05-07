@@ -23,6 +23,7 @@ export const selectFilteredUsers = state => {
 
 export const selectFilter = state => state.users.filter;
 export const selectIsLoading = state => state.users.isLoading;
+export const selectIsUpdating = state => state.users.isUpdating;
 export const selectPage = state => state.users.page;
 export const selectLoadMore = state => state.users.loadMore;
 

@@ -3,6 +3,7 @@ import {
   selectFilter,
   selectFilteredUsers,
   selectIsLoading,
+  selectIsUpdating,
   selectLoadMore,
   selectPage,
   selectUsers,
@@ -16,5 +17,6 @@ export const useUsers = () => {
     page: useSelector(selectPage),
     loadMore: useSelector(selectLoadMore),
     filteredUsers: useSelector(selectFilteredUsers),
+    isUpdating: useSelector(selectIsUpdating),
   };
 };

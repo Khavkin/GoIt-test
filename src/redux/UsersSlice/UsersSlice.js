@@ -6,6 +6,7 @@ const initialState = {
   loadMore: true,
   filter: 'All',
   isLoading: false,
+  isUpdating: false,
   isError: false,
   page: 1,
 };
@@ -26,17 +27,16 @@ const UsersSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addMatcher(
-      isAnyOf(
-        mockApi.endpoints.getUsersByPage.matchPending,
-        mockApi.endpoints.updateUserById.matchPending
-      ),
-      state => {
-        console.log('Pending...');
-        state.isLoading = true;
-        state.isError = false;
-      }
-    );
+    builder.addMatcher(mockApi.endpoints.getUsersByPage.matchPending, state => {
+      // console.log('Pending...');
+      state.isLoading = true;
+      state.isError = false;
+    });
+    builder.addMatcher(mockApi.endpoints.updateUserById.matchPending, state => {
+      // console.log('Pending...');
+      state.isUpdating = true;
+      state.isError = false;
+    });
     builder.addMatcher(mockApi.endpoints.getUsersByPage.matchFulfilled, (state, { payload }) => {
       console.log('getUSerbyPage', payload);
       state.users = [...state.users, ...payload];
@@ -58,6 +58,8 @@ const UsersSlice = createSlice({
         users.splice(index, 1, payload);
         state.users = [...users];
       }
+      state.isUpdating = false;
+      state.isError = false;
     });
 
     builder.addMatcher(
@@ -69,6 +71,7 @@ const UsersSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.loadMore = false;
+        state.isUpdating = false;
       }
     );
   },
