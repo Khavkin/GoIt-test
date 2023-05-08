@@ -29,21 +29,17 @@ const UsersSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addMatcher(mockApi.endpoints.getUsersByPage.matchPending, state => {
-      // console.log('Pending...');
       state.isLoading = true;
       state.isError = false;
     });
     builder.addMatcher(mockApi.endpoints.updateUserById.matchPending, state => {
-      // console.log('Pending...');
       state.isUpdating = true;
       state.isError = false;
     });
     builder.addMatcher(mockApi.endpoints.getUsersByPage.matchFulfilled, (state, { payload }) => {
-      console.log('getUSerbyPage', payload);
       state.users = [...state.users, ...payload];
 
       if (payload.length === 3) {
-        console.log('set loadMore=true');
         state.loadMore = true;
       } else {
         console.log('set loadMore=false');

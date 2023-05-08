@@ -12,7 +12,6 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
-//console.dir(theme);
 
 const formatNumber = num => {
   const myObj = {
@@ -23,10 +22,9 @@ const formatNumber = num => {
 
 export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 0, id = 0 }) => {
   const usersSubscriptions = useSelector(selectSubscribe);
-  const [updateUser, { isLoading, error, isError }] = useUpdateUserByIdMutation();
+  const [updateUser, { isLoading }] = useUpdateUserByIdMutation();
   const dispatch = useDispatch();
   const [isFollowing, setIsFollowing] = useState(false);
-  // console.log(usersSubscriptions);
 
   const getSubscritionIndex = useCallback(() => {
     const index = usersSubscriptions.indexOf(id);
