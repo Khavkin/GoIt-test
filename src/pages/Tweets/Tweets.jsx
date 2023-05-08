@@ -1,10 +1,11 @@
-import { Box, Button, InputLabel, MenuItem, Select, Toolbar } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, Toolbar } from '@mui/material';
 import { TweetsList } from '../../components/TweetsList/TweetsList';
 import { useDispatch } from 'react-redux';
 import { useUsers } from '../../Hooks/useUsers';
 import { setFilter, setPage } from '../../redux/UsersSlice/UsersSlice';
 import { theme } from '../../Theme/Theme';
 import { ClockLoader } from 'react-spinners';
+import { deepPurple } from '@mui/material/colors';
 
 export const Tweets = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export const Tweets = () => {
       <Box component="div">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Button>Back</Button>
+          {/* <FormControl fullWidth> */}
           <InputLabel
             sx={{
               display: 'flex',
@@ -36,11 +38,20 @@ export const Tweets = () => {
             Select users
             <Select
               value={filter}
+              variant="outlined"
               onChange={handleOnFilterChange}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    bgcolor: theme.palette.background.default,
+                    color: theme.palette.primary.main,
+                  },
+                },
+              }}
               sx={{
                 width: '150px',
                 color: theme.palette.primary.main,
-                zIndex: '100',
+                // zIndex: '100',
                 background: theme.palette.background.default,
               }}
             >
@@ -49,6 +60,7 @@ export const Tweets = () => {
               <MenuItem value={'Following'}>Following</MenuItem>
             </Select>
           </InputLabel>
+          {/* </FormControl> */}
         </Toolbar>
       </Box>
       <TweetsList />
