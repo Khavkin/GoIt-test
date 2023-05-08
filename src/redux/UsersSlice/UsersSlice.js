@@ -1,5 +1,6 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { mockApi } from '../../services/api/mockapi';
+import { toast } from 'react-hot-toast';
 
 const initialState = {
   users: [],
@@ -72,6 +73,7 @@ const UsersSlice = createSlice({
         state.isError = true;
         state.loadMore = false;
         state.isUpdating = false;
+        toast.error(payload.error);
       }
     );
   },

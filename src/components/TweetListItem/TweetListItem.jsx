@@ -11,6 +11,7 @@ import { theme } from '../../Theme/Theme';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useCallback } from 'react';
+import { toast } from 'react-hot-toast';
 //console.dir(theme);
 
 const formatNumber = num => {
@@ -44,16 +45,18 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
         await updateUser({ id: id, followers: followers - 1 });
         dispatch(deleteSubscription(index));
         setIsFollowing(false);
+        toast.success(`Success unfollowing from ${user}`);
       } catch (error) {
-        console.log(error);
+        toast.error(`Error on unfollow from ${user}`);
       }
     } else {
       try {
         await updateUser({ id: id, followers: followers + 1 });
         dispatch(addSubscription(id));
         setIsFollowing(true);
+        toast.success(`Success follow to ${user}`);
       } catch (error) {
-        console.log(error);
+        toast.error(`Error on follow to ${user}`);
       }
     }
   };
@@ -132,7 +135,6 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
           sx={{
             mb: '16px',
             textTransform: 'uppercase',
-            // fontFamily: 'Montserrat',
             fontWeight: '500',
             fontSize: '20px',
             display: 'flex',
@@ -145,7 +147,6 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
           sx={{
             mb: '26px',
             textTransform: 'uppercase',
-            // fontFamily: 'Montserrat',
             fontWeight: '500',
             fontSize: '20px',
             display: 'flex',
@@ -158,7 +159,6 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
           sx={{
             width: '196px',
             height: '50px',
-            // fontFamily: 'Montserrat',
             fontWeight: '600',
             fontSize: '18px',
             background: theme => {
@@ -167,7 +167,7 @@ export const TweetListItem = ({ user = '', avatar = '', tweets = 0, followers = 
             boxShadow: '0px 3.43693px 3.43693px rgba(0, 0, 0, 0.25)',
             borderRadius: '10.3108px',
             color: `${theme.palette.text.secondary}`,
-            ':hover': { background: '#5CD3A8' },
+            ':hover': { background: '#ca98ff', color: theme.palette.background.default },
           }}
           onClick={handleOnClick}
         >

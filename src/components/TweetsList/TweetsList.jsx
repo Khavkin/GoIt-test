@@ -5,13 +5,10 @@ import { useUsers } from '../../Hooks/useUsers';
 
 export const TweetsList = () => {
   const { filteredUsers = [], page } = useUsers();
-  const { error, isLoading } = useGetUsersByPageQuery(page);
-
-  //console.log(users, isLoading);
+  const { isLoading } = useGetUsersByPageQuery(page);
 
   return (
     <Box component={'section'}>
-      {isLoading && <h2>Loadding...</h2>}
       {!isLoading && (
         <Box
           component={'ul'}

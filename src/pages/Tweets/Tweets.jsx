@@ -32,7 +32,6 @@ export const Tweets = () => {
       <Box component="div">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Button onClick={handleOnBackButtonClick}>Back</Button>
-          {/* <FormControl fullWidth> */}
           <InputLabel
             sx={{
               display: 'flex',
@@ -58,7 +57,6 @@ export const Tweets = () => {
               sx={{
                 width: '150px',
                 color: theme.palette.primary.main,
-                // zIndex: '100',
                 background: theme.palette.background.default,
               }}
             >
@@ -67,7 +65,6 @@ export const Tweets = () => {
               <MenuItem value={'Following'}>Following</MenuItem>
             </Select>
           </InputLabel>
-          {/* </FormControl> */}
         </Toolbar>
       </Box>
       <TweetsList />
