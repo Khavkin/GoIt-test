@@ -6,9 +6,9 @@ export const Home = () => {
     <Box
       component="main"
       sx={{
-        width: '700px',
-        height: '300px',
-        padding: '28px 36px',
+        maxWidth: '700px',
+        height: 'auto',
+        padding: '36px 28px',
         margin: '50px auto 0',
         position: 'relative',
         boxShadow: '-2.5777px 6.87386px 20.6216px rgba(0, 0, 0, 0.23)',
@@ -20,10 +20,10 @@ export const Home = () => {
         alignItems: 'center',
       }}
     >
-      <Typography variant="h3" component="h1">
-        React test application
+      <Typography variant="h3" component="h1" align="center">
+        GoIT React test application
       </Typography>
-      <Typography variant="h4" component="p" sx={{ mt: '40px' }}>
+      <Typography variant="h4" component="p" align="center" sx={{ mt: '40px' }}>
         {'[React.JS, React Tool Kit, RTK Query, Redux, Routers, Persist, Material UI]'}
       </Typography>
     </Box>
