@@ -1,7 +1,7 @@
 {
   "name": "goit-test",
   "version": "0.1.0",
-  "homepage": "https://khavkin.github.io/goit-test",
+  "homepage": "https://khavkin.github.io/goit-test/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.0",
