@@ -1,5 +1,5 @@
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Toolbar } from '@mui/material';
-import { TweetsList } from '../../components/TweetsList/TweetsList';
+import { Box, Button, InputLabel, MenuItem, Select, Toolbar } from '@mui/material';
+import TweetsList from '../../components/TweetsList';
 import { useDispatch } from 'react-redux';
 import { useUsers } from '../../Hooks/useUsers';
 import { setFilter, setPage } from '../../redux/UsersSlice/UsersSlice';

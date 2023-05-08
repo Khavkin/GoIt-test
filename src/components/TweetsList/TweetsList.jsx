@@ -1,12 +1,9 @@
-import TweetListItem from '../TweetListItem/TweetListItem';
+import TweetListItem from '../TweetListItem';
 import { useGetUsersByPageQuery } from '../../services/api/mockapi';
-import { useParams } from 'react-router-dom';
 import { Box } from '@mui/material';
 import { useUsers } from '../../Hooks/useUsers';
 
 export const TweetsList = () => {
-  //const page = useParams
-
   const { filteredUsers = [], page } = useUsers();
   const { error, isLoading } = useGetUsersByPageQuery(page);
 
@@ -36,3 +33,5 @@ export const TweetsList = () => {
     </Box>
   );
 };
+
+export default TweetsList;
