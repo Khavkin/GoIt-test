@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/goit-test/static/css/main.999f4b85.css",
-    "main.js": "/goit-test/static/js/main.963777bd.js",
+    "main.js": "/goit-test/static/js/main.26d93c1e.js",
     "static/media/tweets-backround.png": "/goit-test/static/media/tweets-backround.b3d9942b3f9d5dad1ff0.png",
     "static/media/logo.svg": "/goit-test/static/media/logo.e917114d7945c04c85a8946a331d28b6.svg",
     "index.html": "/goit-test/index.html",
     "main.999f4b85.css.map": "/goit-test/static/css/main.999f4b85.css.map",
-    "main.963777bd.js.map": "/goit-test/static/js/main.963777bd.js.map"
+    "main.26d93c1e.js.map": "/goit-test/static/js/main.26d93c1e.js.map"
   },
   "entrypoints": [
     "static/css/main.999f4b85.css",
-    "static/js/main.963777bd.js"
+    "static/js/main.26d93c1e.js"
   ]
 }
