@@ -42,7 +42,6 @@ const UsersSlice = createSlice({
       if (payload.length === 3) {
         state.loadMore = true;
       } else {
-        console.log('set loadMore=false');
         state.loadMore = false;
       }
       state.isLoading = false;
