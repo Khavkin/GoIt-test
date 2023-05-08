@@ -5,11 +5,14 @@ import { useUsers } from '../../Hooks/useUsers';
 import { setFilter, setPage } from '../../redux/UsersSlice/UsersSlice';
 import { theme } from '../../Theme/Theme';
 import { ClockLoader } from 'react-spinners';
-import { deepPurple } from '@mui/material/colors';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const Tweets = () => {
   const dispatch = useDispatch();
   const { page, loadMore, isLoading, filter } = useUsers();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const backPath = location.state ? location.state : '/';
 
   const handleOnClick = () => {
     dispatch(setPage(page + 1));
@@ -19,12 +22,16 @@ export const Tweets = () => {
     dispatch(setFilter(target.value));
   };
 
+  const handleOnBackButtonClick = () => {
+    navigate(backPath);
+  };
+
   return (
     // toolbar
     <Box component="main">
       <Box component="div">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
-          <Button>Back</Button>
+          <Button onClick={handleOnBackButtonClick}>Back</Button>
           {/* <FormControl fullWidth> */}
           <InputLabel
             sx={{
